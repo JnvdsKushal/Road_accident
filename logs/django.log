@@ -1,0 +1,43 @@
+[INFO] 2025-11-17 11:18:16,328 views Computing routes: (50.3548111,2.3307317) -> (45.162364,15.7123455)
+[INFO] 2025-11-17 11:18:16,330 views Requesting routes from OSRM: 50.3548111,2.3307317 to 45.162364,15.7123455
+[INFO] 2025-11-17 11:18:18,498 views Scoring 2 routes against 200 hotspots
+[INFO] 2025-11-17 11:18:18,569 views Scoring route: 20636 coords, 1500.66km, sampling 305 points
+[INFO] 2025-11-17 11:18:18,764 views Route analysis: 0 hotspots (H:0, M:0, L:0), raw=0.00, density=0.00/km
+[INFO] 2025-11-17 11:18:18,839 views Scoring route: 19243 coords, 1550.05km, sampling 302 points
+[INFO] 2025-11-17 11:18:19,036 views Route analysis: 0 hotspots (H:0, M:0, L:0), raw=0.00, density=0.00/km
+[INFO] 2025-11-17 11:22:38,488 views Computing routes: (17.4645117,78.4794777) -> (17.4930841,78.4054408)
+[INFO] 2025-11-17 11:22:38,488 views Requesting routes from OSRM: 17.4645117,78.4794777 to 17.4930841,78.4054408
+[INFO] 2025-11-17 11:22:39,292 views Scoring 1 routes against 200 hotspots
+[INFO] 2025-11-17 11:22:39,292 views Scoring route: 269 coords, 10.16km, sampling 269 points
+[INFO] 2025-11-17 11:22:39,477 views Route analysis: 0 hotspots (H:0, M:0, L:0), raw=0.00, density=0.00/km
+[INFO] 2025-11-17 11:36:35,478 views Computing routes: (17.4688992,78.4865491) -> (17.4930841,78.4054408)
+[INFO] 2025-11-17 11:36:35,478 views Requesting routes from OSRM: 17.4688992,78.4865491 to 17.4930841,78.4054408
+[INFO] 2025-11-17 11:36:36,657 views Scoring 1 routes against 200 hotspots
+[INFO] 2025-11-17 11:36:36,657 views Scoring route: 303 coords, 10.80km, sampling 303 points
+[INFO] 2025-11-17 11:36:36,861 views Route analysis: 0 hotspots (H:0, M:0, L:0), raw=0.00, density=0.00/km
+[INFO] 2025-11-17 11:37:28,816 views Computing routes: (17.4688992,78.4865491) -> (17.4930841,78.4054408)
+[INFO] 2025-11-17 11:37:28,816 views Requesting routes from OSRM: 17.4688992,78.4865491 to 17.4930841,78.4054408
+[INFO] 2025-11-17 11:37:29,256 views Scoring 1 routes against 200 hotspots
+[INFO] 2025-11-17 11:37:29,256 views Scoring route: 303 coords, 10.80km, sampling 303 points
+[INFO] 2025-11-17 11:37:29,473 views Route analysis: 0 hotspots (H:0, M:0, L:0), raw=0.00, density=0.00/km
+[INFO] 2025-11-17 11:39:18,645 views Computing routes: (17.4688992,78.4865491) -> (17.4930841,78.4054408)
+[INFO] 2025-11-17 11:39:18,645 views Requesting routes from OSRM: 17.4688992,78.4865491 to 17.4930841,78.4054408
+[INFO] 2025-11-17 11:39:19,488 views OSRM returned only 1 route(s), trying ORS for more alternatives...
+[INFO] 2025-11-17 11:39:19,490 views Requesting routes from ORS: 17.4688992,78.4865491 to 17.4930841,78.4054408
+[INFO] 2025-11-17 11:39:22,545 views ORS Response Status: 200
+[WARNING] 2025-11-17 11:39:22,545 views ORS fallback failed: 'str' object has no attribute 'get', continuing with OSRM routes
+[INFO] 2025-11-17 11:39:22,545 views Scoring 1 routes against 200 hotspots
+[INFO] 2025-11-17 11:39:22,545 views Scoring route: 303 coords, 10.80km, sampling 303 points
+[INFO] 2025-11-17 11:39:22,762 views Route analysis: 0 hotspots (H:0, M:0, L:0), raw=0.00, density=0.00/km
+[INFO] 2025-11-17 11:39:22,796 views Route details: [(10793.3, 903.8, 5.0)]
+[INFO] 2025-11-17 11:46:20,732 views Computing routes: (17.4645246,78.4795335) -> (17.4930841,78.4054408)
+[INFO] 2025-11-17 11:46:20,732 views Requesting routes from OSRM: 17.4645246,78.4795335 to 17.4930841,78.4054408
+[INFO] 2025-11-17 11:46:21,274 views OSRM returned only 1 route, generating synthetic alternatives...
+[INFO] 2025-11-17 11:46:21,332 views Scoring 3 routes against 200 hotspots
+[INFO] 2025-11-17 11:46:21,340 views Scoring route: 272 coords, 10.20km, sampling 272 points
+[INFO] 2025-11-17 11:46:21,521 views Route analysis: 0 hotspots (H:0, M:0, L:0), raw=0.00, density=0.00/km
+[INFO] 2025-11-17 11:46:21,521 views Scoring route: 272 coords, 14.09km, sampling 272 points
+[INFO] 2025-11-17 11:46:21,706 views Route analysis: 0 hotspots (H:0, M:0, L:0), raw=0.00, density=0.00/km
+[INFO] 2025-11-17 11:46:21,706 views Scoring route: 272 coords, 21.51km, sampling 272 points
+[INFO] 2025-11-17 11:46:21,892 views Route analysis: 0 hotspots (H:0, M:0, L:0), raw=0.00, density=0.00/km
+[INFO] 2025-11-17 11:46:21,921 views Route details: [(10197.7, 866.9, 5.0), (11135.048513224276, 907.9964809907927, 5.0), (11422.073560706998, 915.7161191185301, 5.0)]

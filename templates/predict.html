@@ -1,0 +1,1303 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- Main Container -->
+<section style="padding: 0; margin: 0;">
+  <!-- Header Section -->
+  <div class="pred-header">
+    <div class="container" style="max-width: 1400px; margin: 0 auto; padding: 0 20px;">
+      <h1 style="margin: 0 0 8px 0; font-size: 2rem; font-weight: 700; color: #1e293b;">AI-Powered Risk Prediction</h1>
+      <p style="margin: 0; color: #64748b; font-size: 1rem;">Real-time location tracking, weather analysis, and intelligent risk assessment</p>
+    </div>
+  </div>
+
+  <!-- Main Grid Layout -->
+  <div class="pred-container">
+    <div class="container" style="max-width: 1400px; margin: 0 auto; padding: 20px;">
+      <div class="pred-grid">
+        
+        <!-- Left Panel - Map -->
+        <div class="pred-card map-card">
+          <div class="card-header">
+            <h3 style="margin: 0; font-size: 1.1rem; font-weight: 600; color: #1e293b;">Live Location Tracking</h3>
+            <button id="useLocationBtn" class="btn-location" title="Refresh Location">
+              <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
+              </svg>
+              Use My Location
+            </button>
+          </div>
+          <div id="map" class="map-container"></div>
+          <div class="location-info">
+            <div class="info-row">
+              <span class="info-label">Latitude:</span>
+              <span id="latDisplay" class="info-value">--</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Longitude:</span>
+              <span id="lngDisplay" class="info-value">--</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Panel - Form -->
+        <div class="pred-card form-card">
+          <div class="card-header">
+            <h3 style="margin: 0; font-size: 1.1rem; font-weight: 600; color: #1e293b;">Environmental & Driving Conditions</h3>
+          </div>
+          
+          <form id="predictionForm" novalidate>
+            <!-- Weather Data Section -->
+            <div class="form-section">
+              <h4 class="section-title">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="margin-right: 6px;">
+                  <path d="M13 10.5a.5.5 0 0 1 .5.5v1a1.5 1.5 0 0 1-1.5 1.5H6a1.5 1.5 0 0 1-1.5-1.5v-1a.5.5 0 0 1 1 0v1a.5.5 0 0 0 .5.5h6a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 1 .5-.5"/>
+                  <path d="M7 2.5a2.5 2.5 0 0 1 4.712-1.17.5.5 0 1 1-.823.563A1.5 1.5 0 1 0 9.5 5.5.5.5 0 0 1 10 6a3.5 3.5 0 1 1-6.396 1.966A1 1 0 1 0 2 9h3.5a.5.5 0 0 1 0 1H2a2 2 0 1 1 .001-4h.026a.5.5 0 0 1 .5-.5A3.5 3.5 0 0 1 7 2.5"/>
+                </svg>
+                Weather Conditions <span id="weatherStatus" class="status-badge">Auto-detecting...</span>
+              </h4>
+              
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label" for="temperature">Temperature (°C)</label>
+                  <input id="temperature" type="number" class="form-input" placeholder="25" readonly>
+                </div>
+                
+                <div class="form-group">
+                  <label class="form-label" for="weather_condition">Weather</label>
+                  <input id="weather_condition" type="text" class="form-input" placeholder="Clear" readonly>
+                </div>
+                
+                <div class="form-group">
+                  <label class="form-label" for="humidity">Humidity (%)</label>
+                  <input id="humidity" type="number" class="form-input" placeholder="65" readonly>
+                </div>
+                
+                <div class="form-group">
+                  <label class="form-label" for="wind_speed">Wind Speed (m/s)</label>
+                  <input id="wind_speed" type="number" class="form-input" placeholder="5" readonly>
+                </div>
+                
+                <div class="form-group">
+                  <label class="form-label" for="visibility">Visibility (km)</label>
+                  <input id="visibility" type="number" class="form-input" placeholder="10" readonly>
+                </div>
+              </div>
+            </div>
+
+            <!-- Driving Conditions Section -->
+            <div class="form-section">
+              <h4 class="section-title">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="margin-right: 6px;">
+                  <path d="M2.52 3.515A2.5 2.5 0 0 1 4.82 2h6.362c1 0 1.904.596 2.298 1.515l.792 1.848c.075.175.21.319.38.404.5.25.855.715.965 1.262l.335 1.679q.05.242.049.49v.413c0 .814-.39 1.543-1 1.997V13.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1.338c-1.292.048-2.745.088-4 .088s-2.708-.04-4-.088V13.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1.892c-.61-.454-1-1.183-1-1.997v-.413a2.5 2.5 0 0 1 .049-.49l.335-1.68c.11-.546.465-1.012.964-1.261a.8.8 0 0 0 .381-.404l.792-1.848ZM3 10a1 1 0 1 0 0-2 1 1 0 0 0 0 2m10 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2M6 8a1 1 0 0 0 0 2h4a1 1 0 1 0 0-2zM2.906 5.189a.51.51 0 0 0 .497.731c.91-.073 3.35-.17 4.597-.17s3.688.097 4.597.17a.51.51 0 0 0 .497-.731l-.956-1.913A.5.5 0 0 0 11.691 3H4.309a.5.5 0 0 0-.447.276L2.906 5.19Z"/>
+                </svg>
+                Driving Parameters
+              </h4>
+              
+              <div class="form-grid">
+                <div class="form-group">
+                  <label class="form-label" for="speed">Average Speed (km/h) *</label>
+                  <input id="speed" type="number" class="form-input" placeholder="60" min="0" max="200" required>
+                </div>
+                
+                <div class="form-group">
+                  <label class="form-label" for="road_condition">Road Condition *</label>
+                  <select id="road_condition" class="form-input" required>
+                    <option value="">Select...</option>
+                    <option value="dry">Dry</option>
+                    <option value="wet">Wet</option>
+                    <option value="snow">Snow/Ice</option>
+                    <option value="muddy">Muddy</option>
+                  </select>
+                </div>
+                
+                <div class="form-group">
+                  <label class="form-label" for="vehicle_type">Vehicle Type *</label>
+                  <select id="vehicle_type" class="form-input" required>
+                    <option value="">Select...</option>
+                    <option value="car">Car/Sedan</option>
+                    <option value="suv">SUV/Truck</option>
+                    <option value="motorcycle">Motorcycle</option>
+                    <option value="bus">Bus</option>
+                    <option value="commercial">Commercial</option>
+                  </select>
+                </div>
+                
+                <div class="form-group">
+                  <label class="form-label" for="traffic_density">Traffic Density *</label>
+                  <select id="traffic_density" class="form-input" required>
+                    <option value="">Select...</option>
+                    <option value="light">Light</option>
+                    <option value="moderate">Moderate</option>
+                    <option value="heavy">Heavy</option>
+                    <option value="congested">Congested</option>
+                  </select>
+                </div>
+                
+                <div class="form-group">
+                  <label class="form-label" for="time_of_day">Time of Day *</label>
+                  <select id="time_of_day" class="form-input" required>
+                    <option value="">Select...</option>
+                    <option value="morning">Morning (6AM-12PM)</option>
+                    <option value="afternoon">Afternoon (12PM-6PM)</option>
+                    <option value="evening">Evening (6PM-9PM)</option>
+                    <option value="night">Night (9PM-6AM)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Hidden Location Fields -->
+            <input type="hidden" id="latitude" name="latitude">
+            <input type="hidden" id="longitude" name="longitude">
+
+            <!-- Action Buttons -->
+            <div class="form-actions">
+              <button type="submit" id="predictBtn" class="btn-predict">
+                <span class="btn-text">
+                  <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16" style="margin-right: 8px;">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                    <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z"/>
+                  </svg>
+                  Predict Risk
+                </span>
+                <span class="btn-loader" style="display: none;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="spinner">
+                    <circle cx="12" cy="12" r="10" stroke-opacity="0.25"/>
+                    <path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round"/>
+                  </svg>
+                  Analyzing...
+                </span>
+              </button>
+              <button type="button" id="resetBtn" class="btn-reset">Reset Form</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Results Section -->
+      <div id="resultsSection" class="results-section" style="display: none;">
+        <div class="results-grid">
+          <!-- Risk Score Card -->
+          <div class="result-card">
+            <div class="result-header">
+              <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z"/>
+              </svg>
+              <h3>Risk Assessment</h3>
+            </div>
+            <div class="circular-progress">
+              <svg width="180" height="180" class="progress-ring">
+                <circle cx="90" cy="90" r="75" fill="none" stroke="#e2e8f0" stroke-width="12"/>
+                <circle id="progressCircle" cx="90" cy="90" r="75" fill="none" stroke-width="12" stroke-linecap="round"
+                  style="stroke-dasharray: 471; stroke-dashoffset: 471; transition: stroke-dashoffset 1.5s ease, stroke 0.5s ease; transform: rotate(-90deg); transform-origin: center;"/>
+              </svg>
+              <div class="progress-center">
+                <div id="riskScoreValue" class="score-value">--</div>
+                <div class="score-label">Risk Score</div>
+              </div>
+            </div>
+            <div id="riskLevelBadge" class="risk-badge">Calculating...</div>
+          </div>
+
+          <!-- Advice Card -->
+          <div class="result-card advice-card">
+            <div class="result-header">
+              <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2"/>
+              </svg>
+              <h3>Safety Recommendation</h3>
+            </div>
+            <div class="advice-content">
+              <p id="adviceText">Complete the form and click "Predict Risk" to receive personalized safety recommendations based on current conditions.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Styles -->
+<style>
+  :root {
+    --primary: #3b82f6;
+    --primary-dark: #2563eb;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --text: #1e293b;
+    --text-light: #64748b;
+    --border: #e2e8f0;
+    --bg-light: #f8fafc;
+  }
+
+  * { box-sizing: border-box; }
+
+  .pred-header {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: white;
+    padding: 30px 0;
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.2);
+  }
+
+  .pred-container {
+    background: #f8fafc;
+    min-height: calc(100vh - 200px);
+    padding: 0;
+  }
+
+  .pred-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+
+  .pred-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+  }
+
+  .card-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+  }
+
+  .map-container {
+    width: 100%;
+    height: 500px;
+    background: #e5e7eb;
+    position: relative;
+  }
+
+  .location-info {
+    padding: 16px 24px;
+    background: #f8fafc;
+    border-top: 1px solid var(--border);
+  }
+
+  .info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 0.9rem;
+  }
+
+  .info-label {
+    color: var(--text-light);
+    font-weight: 500;
+  }
+
+  .info-value {
+    color: var(--text);
+    font-weight: 600;
+    font-family: monospace;
+  }
+
+  .btn-location {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .btn-location:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  }
+
+  .btn-location:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .form-card {
+    max-height: 700px;
+    overflow-y: auto;
+  }
+
+  .form-card::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .form-card::-webkit-scrollbar-track {
+    background: #f1f5f9;
+  }
+
+  .form-card::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+  }
+
+  .form-section {
+    padding: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .form-section:last-child {
+    border-bottom: none;
+  }
+
+  .section-title {
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    margin: 0 0 20px 0;
+  }
+
+  .status-badge {
+    display: inline-block;
+    margin-left: 12px;
+    padding: 4px 12px;
+    background: #dbeafe;
+    color: #1e40af;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .status-badge.success {
+    background: #d1fae5;
+    color: #065f46;
+  }
+
+  .status-badge.error {
+    background: #fee2e2;
+    color: #991b1b;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: var(--text);
+    background: white;
+    transition: all 0.2s ease;
+  }
+
+  .form-input:hover {
+    border-color: #cbd5e1;
+  }
+
+  .form-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    outline: none;
+  }
+
+  .form-input:read-only {
+    background: #f8fafc;
+    cursor: not-allowed;
+  }
+
+  .form-input.error {
+    border-color: var(--danger);
+    animation: shake 0.4s;
+  }
+
+  .form-actions {
+    padding: 24px;
+    display: flex;
+    gap: 12px;
+    background: #f8fafc;
+  }
+
+  .btn-predict, .btn-reset {
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btn-predict {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    flex: 1;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  }
+
+  .btn-predict:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+  }
+
+  .btn-predict:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .btn-reset {
+    background: white;
+    color: var(--text);
+    border: 1.5px solid var(--border);
+  }
+
+  .btn-reset:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+  }
+
+  .spinner {
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  @keyframes shake {
+    10%, 90% { transform: translateX(-2px); }
+    20%, 80% { transform: translateX(2px); }
+    30%, 50%, 70% { transform: translateX(-4px); }
+    40%, 60% { transform: translateX(4px); }
+  }
+
+  .results-section {
+    animation: fadeIn 0.5s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .results-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+  }
+
+  .result-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    padding: 28px;
+  }
+
+  .result-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 24px;
+    color: var(--text);
+  }
+
+  .result-header svg {
+    color: var(--primary);
+  }
+
+  .result-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+  .circular-progress {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    margin: 20px auto;
+  }
+
+  .progress-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  .score-value {
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--text);
+  }
+
+  .score-label {
+    font-size: 13px;
+    color: var(--text-light);
+    margin-top: 6px;
+  }
+
+  .risk-badge {
+    text-align: center;
+    padding: 12px 24px;
+    border-radius: 24px;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-top: 20px;
+  }
+
+  .advice-card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .advice-content {
+    flex: 1;
+    padding: 20px;
+    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+    border-radius: 12px;
+    border-left: 4px solid var(--primary);
+  }
+
+  .advice-content p {
+    margin: 0;
+    line-height: 1.7;
+    color: var(--text);
+    font-size: 1rem;
+  }
+
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    padding: 16px 24px;
+    background: rgba(30, 41, 59, 0.95);
+    color: white;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    animation: slideUp 0.3s ease;
+    z-index: 10000;
+    max-width: 400px;
+  }
+
+  .toast.success {
+    background: rgba(16, 185, 129, 0.95);
+  }
+
+  .toast.error {
+    background: rgba(239, 68, 68, 0.95);
+  }
+
+  .toast.warning {
+    background: rgba(245, 158, 11, 0.95);
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 1200px) {
+    .pred-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .map-container {
+      height: 400px;
+    }
+
+    .results-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .form-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .pred-header {
+      padding: 20px 0;
+    }
+
+    .pred-header h1 {
+      font-size: 1.5rem !important;
+    }
+
+    .circular-progress {
+      width: 150px;
+      height: 150px;
+    }
+
+    .score-value {
+      font-size: 36px;
+    }
+
+    .btn-predict, .btn-reset {
+      width: 100%;
+    }
+
+    .form-actions {
+      flex-direction: column;
+    }
+  }
+</style>
+
+<!-- Scripts -->
+<script>
+  // Configuration
+  const OPENWEATHER_API_KEY = '238a0b774cf658a81a4423180f65e0db';
+  const GOOGLE_MAPS_API_KEY = 'AIzaSyBavsxzXgnYElYOmR4L6wj5fvcxqxUbWDE';
+  const RATE_LIMIT_DURATION = 30000; // 30 seconds
+  const CACHE_DURATION = 300000; // 5 minutes
+
+  // State
+  let map, marker;
+  let lastAPICall = 0;
+  let weatherCache = null;
+
+  // DOM Elements
+  const useLocationBtn = document.getElementById('useLocationBtn');
+  const predictionForm = document.getElementById('predictionForm');
+  const predictBtn = document.getElementById('predictBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const resultsSection = document.getElementById('resultsSection');
+  const weatherStatus = document.getElementById('weatherStatus');
+
+  // Initialize
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log('Initializing Risk Prediction App...');
+    loadGoogleMaps();
+    loadCachedWeather();
+    setCurrentTime();
+  });
+
+  // Load Google Maps
+  function loadGoogleMaps() {
+    console.log('Loading Google Maps...');
+    
+    // Check if Google Maps is already loaded
+    if (typeof google !== 'undefined' && google.maps) {
+      console.log('Google Maps already loaded');
+      initMap();
+      return;
+    }
+
+    // Check if API key is provided
+    if (!GOOGLE_MAPS_API_KEY || GOOGLE_MAPS_API_KEY === 'YOUR_GOOGLE_MAPS_API_KEY') {
+      console.warn('Google Maps API key not configured');
+      initStaticMap();
+      toast('Google Maps API key not configured. Using static map.', 'warning');
+      return;
+    }
+
+    const script = document.createElement('script');
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&callback=initMap&libraries=marker&v=beta`;
+    script.async = true;
+    script.defer = true;
+    script.onerror = () => {
+      console.error('Failed to load Google Maps');
+      initStaticMap();
+      toast('Unable to load Google Maps. Using static map.', 'error');
+    };
+    document.head.appendChild(script);
+  }
+
+  // Initialize Static Map (Fallback)
+  function initStaticMap() {
+    console.log('Initializing static map fallback');
+    const mapContainer = document.getElementById('map');
+    mapContainer.innerHTML = `
+      <div style="width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%); position: relative; overflow: hidden;">
+        <svg width="80" height="80" fill="#3b82f6" viewBox="0 0 16 16" style="margin-bottom: 16px; opacity: 0.8;">
+          <path fill-rule="evenodd" d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
+        </svg>
+        <h3 style="margin: 0 0 8px; color: #1e40af; font-size: 1.1rem;">Location Tracking</h3>
+        <p style="margin: 0; color: #3b82f6; font-size: 0.9rem;">Click "Use My Location" to detect your position</p>
+      </div>
+    `;
+    
+    // Still enable location detection
+    getUserLocation();
+  }
+
+  // Initialize Map with AdvancedMarkerElement
+  window.initMap = async function() {
+    console.log('Initializing Google Maps...');
+    const defaultLocation = { lat: 17.385, lng: 78.486 }; // Hyderabad, Telangana
+
+    const { Map } = await google.maps.importLibrary("maps");
+    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+
+    map = new Map(document.getElementById('map'), {
+      center: defaultLocation,
+      zoom: 12,
+      mapId: 'RISK_PREDICTION_MAP', // Required for AdvancedMarkerElement
+      styles: [
+        {
+          featureType: 'poi',
+          elementType: 'labels',
+          stylers: [{ visibility: 'off' }]
+        }
+      ]
+    });
+
+    // Create AdvancedMarkerElement
+    marker = new AdvancedMarkerElement({
+      map: map,
+      position: defaultLocation,
+      gmpDraggable: true,
+      title: 'Drag to select location'
+    });
+
+    console.log('Marker created:', marker);
+
+    // Marker drag event
+    marker.addListener('dragend', (event) => {
+      console.log('Marker dragged to:', event.latLng);
+      const lat = event.latLng.lat;
+      const lng = event.latLng.lng;
+      updateLocation(lat, lng);
+      fetchWeatherData(lat, lng);
+    });
+
+    // Auto-detect location on load
+    getUserLocation();
+  };
+
+  // Get User Location
+  function getUserLocation() {
+    console.log('Getting user location...');
+    
+    if (!navigator.geolocation) {
+      console.error('Geolocation not supported');
+      toast('Geolocation is not supported by your browser', 'error');
+      return;
+    }
+
+    useLocationBtn.disabled = true;
+    useLocationBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="spinner"><circle cx="12" cy="12" r="10" stroke-opacity="0.25"/><path d="M12 2a10 10 0 0 1 10 10" stroke-linecap="round"/></svg> Locating...';
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+        console.log('Location detected:', lat, lng);
+        
+        if (map && marker) {
+          const location = { lat: lat, lng: lng };
+          map.setCenter(location);
+          marker.position = location;
+          console.log('Map and marker updated');
+        }
+        
+        updateLocation(lat, lng);
+        fetchWeatherData(lat, lng);
+        
+        useLocationBtn.disabled = false;
+        useLocationBtn.innerHTML = '<svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/></svg> Use My Location';
+      },
+      (error) => {
+        console.error('Geolocation error:', error);
+        let errorMessage = 'Unable to retrieve your location';
+        
+        switch(error.code) {
+          case error.PERMISSION_DENIED:
+            errorMessage = 'Location permission denied. Please enable location access.';
+            break;
+          case error.POSITION_UNAVAILABLE:
+            errorMessage = 'Location information unavailable.';
+            break;
+          case error.TIMEOUT:
+            errorMessage = 'Location request timed out.';
+            break;
+        }
+        
+        toast(errorMessage, 'error');
+        useLocationBtn.disabled = false;
+        useLocationBtn.innerHTML = '<svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/></svg> Use My Location';
+      }
+    );
+  }
+
+  // Update Location Display
+  function updateLocation(lat, lng) {
+    console.log('Updating location display:', lat, lng);
+    document.getElementById('latitude').value = lat;
+    document.getElementById('longitude').value = lng;
+    document.getElementById('latDisplay').textContent = lat.toFixed(6);
+    document.getElementById('lngDisplay').textContent = lng.toFixed(6);
+  }
+
+  // Check Rate Limit
+  function checkRateLimit() {
+    const now = Date.now();
+    if (now - lastAPICall < RATE_LIMIT_DURATION) {
+      const remainingSeconds = Math.ceil((RATE_LIMIT_DURATION - (now - lastAPICall)) / 1000);
+      toast(`Please wait ${remainingSeconds} seconds before refreshing data`, 'warning');
+      return false;
+    }
+    lastAPICall = now;
+    return true;
+  }
+
+  // Fetch Weather Data
+  async function fetchWeatherData(lat, lng) {
+    console.log('Fetching weather data for:', lat, lng);
+    
+    if (!checkRateLimit()) return;
+
+    // Check if API key is configured
+    if (!OPENWEATHER_API_KEY || OPENWEATHER_API_KEY === 'YOUR_OPENWEATHERMAP_API_KEY') {
+      console.warn('OpenWeather API key not configured');
+      weatherStatus.textContent = 'Not configured';
+      weatherStatus.className = 'status-badge error';
+      toast('OpenWeather API key not configured. Please enter weather data manually.', 'warning');
+      
+      // Enable manual input for weather fields
+      ['temperature', 'weather_condition', 'humidity', 'wind_speed', 'visibility'].forEach(id => {
+        const field = document.getElementById(id);
+        if (field) field.removeAttribute('readonly');
+      });
+      return;
+    }
+
+    weatherStatus.textContent = 'Fetching...';
+    weatherStatus.className = 'status-badge';
+
+    try {
+      const response = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${OPENWEATHER_API_KEY}&units=metric`
+      );
+
+      console.log('Weather API response status:', response.status);
+
+      if (!response.ok) {
+        if (response.status === 401) {
+          throw new Error('Invalid API key');
+        } else if (response.status === 429) {
+          throw new Error('API rate limit exceeded');
+        } else {
+          throw new Error(`API error: ${response.status}`);
+        }
+      }
+
+      const data = await response.json();
+      console.log('Weather data received:', data);
+      
+      const weatherData = {
+        temperature: Math.round(data.main.temp),
+        condition: data.weather[0].main,
+        humidity: data.main.humidity,
+        wind_speed: Math.round(data.wind.speed * 10) / 10,
+        visibility: Math.round(data.visibility / 1000),
+        timestamp: Date.now()
+      };
+
+      // Cache the data
+      localStorage.setItem('weatherCache', JSON.stringify(weatherData));
+      weatherCache = weatherData;
+
+      // Update form fields
+      document.getElementById('temperature').value = weatherData.temperature;
+      document.getElementById('weather_condition').value = weatherData.condition;
+      document.getElementById('humidity').value = weatherData.humidity;
+      document.getElementById('wind_speed').value = weatherData.wind_speed;
+      document.getElementById('visibility').value = weatherData.visibility;
+
+      weatherStatus.textContent = 'Updated';
+      weatherStatus.className = 'status-badge success';
+      toast('Weather data updated successfully', 'success');
+
+    } catch (error) {
+      console.error('Weather fetch error:', error);
+      weatherStatus.textContent = 'Failed';
+      weatherStatus.className = 'status-badge error';
+      
+      let errorMessage = 'Unable to fetch weather data. Please enter manually.';
+      if (error.message.includes('Invalid API key')) {
+        errorMessage = 'Weather API key is invalid. Please check configuration.';
+      } else if (error.message.includes('rate limit')) {
+        errorMessage = 'Weather API rate limit reached. Please try again later.';
+      }
+      
+      toast(errorMessage, 'error');
+      
+      // Enable manual input
+      ['temperature', 'weather_condition', 'humidity', 'wind_speed', 'visibility'].forEach(id => {
+        const field = document.getElementById(id);
+        if (field) field.removeAttribute('readonly');
+      });
+    }
+  }
+
+  // Load Cached Weather
+  function loadCachedWeather() {
+    console.log('Loading cached weather data...');
+    const cached = localStorage.getItem('weatherCache');
+    if (cached) {
+      const data = JSON.parse(cached);
+      const age = Date.now() - data.timestamp;
+      
+      if (age < CACHE_DURATION) {
+        console.log('Using cached weather data');
+        weatherCache = data;
+        document.getElementById('temperature').value = data.temperature;
+        document.getElementById('weather_condition').value = data.condition;
+        document.getElementById('humidity').value = data.humidity;
+        document.getElementById('wind_speed').value = data.wind_speed;
+        document.getElementById('visibility').value = data.visibility;
+        
+        weatherStatus.textContent = 'Cached';
+        weatherStatus.className = 'status-badge';
+      } else {
+        console.log('Cached weather data expired');
+        localStorage.removeItem('weatherCache');
+      }
+    }
+  }
+
+  // Set Current Time
+  function setCurrentTime() {
+    const hour = new Date().getHours();
+    const timeSelect = document.getElementById('time_of_day');
+    
+    if (hour >= 6 && hour < 12) {
+      timeSelect.value = 'morning';
+    } else if (hour >= 12 && hour < 18) {
+      timeSelect.value = 'afternoon';
+    } else if (hour >= 18 && hour < 21) {
+      timeSelect.value = 'evening';
+    } else {
+      timeSelect.value = 'night';
+    }
+    console.log('Current time of day set to:', timeSelect.value);
+  }
+
+  // Form Validation
+  function validateForm() {
+    console.log('Validating form...');
+    const requiredFields = ['speed', 'road_condition', 'vehicle_type', 'traffic_density', 'time_of_day'];
+    let isValid = true;
+
+    for (const fieldId of requiredFields) {
+      const field = document.getElementById(fieldId);
+      if (!field.value) {
+        console.log('Missing required field:', fieldId);
+        field.classList.add('error');
+        setTimeout(() => field.classList.remove('error'), 400);
+        isValid = false;
+      }
+    }
+
+    if (!isValid) {
+      toast('Please fill in all required fields', 'error');
+      return false;
+    }
+
+    const speed = document.getElementById('speed').value;
+    if (speed < 0 || speed > 200) {
+      console.log('Invalid speed value:', speed);
+      toast('Speed must be between 0 and 200 km/h', 'error');
+      return false;
+    }
+
+    const lat = document.getElementById('latitude').value;
+    const lng = document.getElementById('longitude').value;
+    if (!lat || !lng) {
+      console.log('Location not detected');
+      toast('Location not detected. Please use the "Use My Location" button', 'error');
+      return false;
+    }
+
+    console.log('Form validation passed');
+    return true;
+  }
+
+  // Submit Prediction
+// Submit Prediction
+async function submitPrediction(event) {
+  event.preventDefault();
+  console.log('Submitting prediction...');
+
+  if (!validateForm()) return;
+
+  setLoading(true);
+
+  // Gather all form data
+  const formData = {
+    latitude: document.getElementById('latitude').value,
+    longitude: document.getElementById('longitude').value,
+    temperature: document.getElementById('temperature').value || null,
+    weather_condition: document.getElementById('weather_condition').value || null,
+    humidity: document.getElementById('humidity').value || null,
+    wind_speed: document.getElementById('wind_speed').value || null,
+    visibility: document.getElementById('visibility').value || null,
+    speed: document.getElementById('speed').value,
+    road_condition: document.getElementById('road_condition').value,
+    vehicle_type: document.getElementById('vehicle_type').value,
+    traffic_density: document.getElementById('traffic_density').value,
+    time_of_day: document.getElementById('time_of_day').value
+  };
+
+  console.log('Form data:', formData);
+
+  try {
+    console.log('Sending POST request to /predict/');
+    // ✅ FIXED: Changed from '/predict/api/' to '/predict/'
+    const response = await fetch('/predict/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': getCookie('csrftoken')
+      },
+      body: JSON.stringify(formData)
+    });
+
+    console.log('Response received:', response.status, response.statusText);
+
+    // First check the content type
+    const contentType = response.headers.get('content-type');
+    console.log('Response content-type:', contentType);
+
+    // Try to get the response text first
+    const responseText = await response.text();
+    console.log('Response text (first 500 chars):', responseText.substring(0, 500));
+
+    // Check if response is JSON
+    if (!contentType || !contentType.includes('application/json')) {
+      console.error('Server returned non-JSON response');
+      console.error('Full response:', responseText);
+      throw new Error('Server returned non-JSON response. Please check the server configuration.');
+    }
+
+    // Parse JSON
+    let data;
+    try {
+      data = JSON.parse(responseText);
+      console.log('Parsed JSON data:', data);
+    } catch (parseError) {
+      console.error('JSON parse error:', parseError);
+      console.error('Response text:', responseText);
+      throw new Error('Failed to parse server response as JSON');
+    }
+
+    // Check response status
+    if (!response.ok) {
+      console.error('Server returned error status:', response.status);
+      throw new Error(data.error || `Server error: ${response.status}`);
+    }
+
+    // Check for error in data
+    if (data.error) {
+      console.error('Server returned error:', data.error);
+      toast(data.error, 'error');
+      return;
+    }
+
+    console.log('Prediction successful:', data);
+    displayResults(data);
+    toast('Risk assessment completed!', 'success');
+
+  } catch (error) {
+    console.error('Prediction error:', error);
+    console.error('Error stack:', error.stack);
+    
+    let errorMessage = 'Failed to get prediction. Please try again.';
+    
+    if (error.message.includes('non-JSON') || error.message.includes('parse')) {
+      errorMessage = 'Server configuration error. Please check the server logs.';
+    } else if (error.message.includes('NetworkError') || error.message.includes('Failed to fetch')) {
+      errorMessage = 'Network error. Please check your connection and try again.';
+    } else if (error.message) {
+      errorMessage = error.message;
+    }
+    
+    toast(errorMessage, 'error');
+  } finally {
+    setLoading(false);
+  }
+}
+
+  // Display Results
+  function displayResults(data) {
+    console.log('Displaying results:', data);
+    
+    const score = data.risk_score || 0;
+    const level = (data.risk_level || 'Unknown').toLowerCase();
+    const advice = data.advice || 'No specific advice available.';
+
+    // Show results section
+    resultsSection.style.display = 'block';
+    resultsSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+    // Update risk score
+    document.getElementById('riskScoreValue').textContent = score;
+
+    // Update circular progress
+    const circumference = 471; // 2 * PI * 75
+    const offset = circumference - (score / 100) * circumference;
+    const progressCircle = document.getElementById('progressCircle');
+    
+    setTimeout(() => {
+      progressCircle.style.strokeDashoffset = offset;
+    }, 100);
+
+    // Set colors based on risk level
+    let color, bgColor, textColor;
+    
+    if (level === 'low') {
+      color = '#10b981';
+      bgColor = '#d1fae5';
+      textColor = '#065f46';
+    } else if (level === 'medium' || level === 'moderate') {
+      color = '#f59e0b';
+      bgColor = '#fef3c7';
+      textColor = '#92400e';
+    } else {
+      color = '#ef4444';
+      bgColor = '#fee2e2';
+      textColor = '#991b1b';
+    }
+
+    progressCircle.style.stroke = color;
+    document.getElementById('riskScoreValue').style.color = color;
+
+    // Update risk badge
+    const riskBadge = document.getElementById('riskLevelBadge');
+    riskBadge.textContent = data.risk_level || 'Unknown';
+    riskBadge.style.backgroundColor = bgColor;
+    riskBadge.style.color = textColor;
+
+    // Update advice
+    document.getElementById('adviceText').textContent = advice;
+    document.querySelector('.advice-content').style.borderLeftColor = color;
+    
+    console.log('Results displayed successfully');
+  }
+
+  // Set Loading State
+  function setLoading(isLoading) {
+    const btnText = predictBtn.querySelector('.btn-text');
+    const btnLoader = predictBtn.querySelector('.btn-loader');
+
+    predictBtn.disabled = isLoading;
+
+    if (isLoading) {
+      btnText.style.display = 'none';
+      btnLoader.style.display = 'inline-flex';
+    } else {
+      btnText.style.display = 'inline-flex';
+      btnLoader.style.display = 'none';
+    }
+  }
+
+  // Reset Form
+  function resetForm() {
+    console.log('Resetting form...');
+    predictionForm.reset();
+    resultsSection.style.display = 'none';
+    
+    // Reset progress circle
+    document.getElementById('progressCircle').style.strokeDashoffset = 471;
+    document.getElementById('riskScoreValue').textContent = '--';
+    document.getElementById('riskLevelBadge').textContent = 'Calculating...';
+    document.getElementById('adviceText').textContent = 'Complete the form and click "Predict Risk" to receive personalized safety recommendations based on current conditions.';
+    
+    // Clear location
+    document.getElementById('latitude').value = '';
+    document.getElementById('longitude').value = '';
+    document.getElementById('latDisplay').textContent = '--';
+    document.getElementById('lngDisplay').textContent = '--';
+    
+    // Reset weather fields
+    ['temperature', 'weather_condition', 'humidity', 'wind_speed', 'visibility'].forEach(id => {
+      document.getElementById(id).value = '';
+    });
+    
+    weatherStatus.textContent = 'Auto-detecting...';
+    weatherStatus.className = 'status-badge';
+    
+    toast('Form reset successfully', 'success');
+  }
+
+  // Toast Notification
+  function toast(message, type = 'info') {
+    console.log(`Toast [${type}]:`, message);
+    const toastEl = document.createElement('div');
+    toastEl.className = `toast ${type}`;
+    toastEl.textContent = message;
+    document.body.appendChild(toastEl);
+    
+    setTimeout(() => {
+      toastEl.style.opacity = '0';
+      setTimeout(() => toastEl.remove(), 300);
+    }, 3000);
+  }
+
+  // Get CSRF Token
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    console.log('CSRF token:', cookieValue ? 'Found' : 'Not found');
+    return cookieValue;
+  }
+
+  // Event Listeners
+  if (useLocationBtn) {
+    useLocationBtn.addEventListener('click', getUserLocation);
+  }
+
+  if (predictionForm) {
+    predictionForm.addEventListener('submit', submitPrediction);
+  }
+
+  if (resetBtn) {
+    resetBtn.addEventListener('click', resetForm);
+  }
+
+  console.log('Event listeners attached');
+</script>
+
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analytics - SafeRoute AI</title>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+  <style>
+    body {
+      background: #f5f6fa;
+      font-family: "Poppins", sans-serif;
+    }
+    h2 {
+      text-align: center;
+      margin-top: 20px;
+      font-weight: 600;
+    }
+    #map {
+      height: 90vh;
+      width: 90%;
+      margin: 30px auto;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <h2>🗺️ Road Accident Risk Zones in India</h2>
+  <div id="map"></div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <!-- Custom Map Script -->
+  <script src="{% static 'js/analytics_map.js' %}"></script>
+</body>
+</html>
+{% endblock %}

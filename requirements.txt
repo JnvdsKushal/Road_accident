@@ -1,0 +1,10 @@
+Django>=4.2
+joblib
+numpy
+scikit-learn
+pandas
+gunicorn
+# Optional (for forms and maps):
+python-dotenv
+requests
+psycopg2-binary # if using PostgreSQL

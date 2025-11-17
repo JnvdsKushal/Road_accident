@@ -1,0 +1,201 @@
+ID,Location_Name,Latitude,Longitude,Accidents,Fatalities,Injuries,Vehicle_Major,Road_Type,Time,Weather,Speed_Limit,Severity_Score,Risk_Level
+1,Ameerpet Metro,17.222725,78.252944,17,0,13,Cars,Urban,Night,Fog,60,56,Medium
+2,Narayanaguda,17.292329,78.27454,28,4,23,2-Wheelers,Urban,Day,Rainy,40,133,High
+3,Punjagutta,17.577308,78.532425,36,0,13,2-Wheelers,Highway,Day,Fog,40,75,High
+4,Bahadurpura,17.519621,78.311469,16,0,5,Autos,Corporate Zone,Morning,Dust,30,31,Medium
+5,Tolichowki Main Road,17.498654,78.384794,22,0,29,Mixed,Corporate Zone,Evening,Rainy,50,109,High
+6,Bahadurpura,17.503801,78.347288,53,4,18,Buses,Urban,Evening,Rainy,30,143,High
+7,LB Stadium Area,17.539711,78.288383,42,4,8,Buses,Expressway,Night,Rainy,30,102,High
+8,Charminar Circle,17.492979,78.408763,56,2,6,2-Wheelers,Main Road,Peak,Clear,60,92,High
+9,Afzalgunj,17.551222,78.510916,26,0,18,Cars,Narrow Urban,Day,Humid,100,80,High
+10,Begumpet Airport Rd,17.255097,78.305977,12,4,18,Buses,Urban,Night,Clear,100,102,High
+11,Narayanaguda,17.352899,78.479699,18,0,27,2-Wheelers,Urban,Evening,Dust,50,99,High
+12,Ameerpet Metro,17.416305,78.542641,29,2,8,2-Wheelers,Corporate Zone,Day,Clear,30,71,High
+13,Hayathnagar Main Rd,17.249493,78.427045,45,0,32,Cars,Narrow Urban,Night,Dust,60,141,High
+14,RTC X Roads,17.379083,78.394241,37,0,9,Cars,Highway,Morning,Humid,50,64,Medium
+15,RTC X Roads,17.379426,78.570867,34,1,31,Buses,Main Road,Evening,Dust,40,136,High
+16,Kukatpally JNTU,17.447897,78.391991,48,4,16,2-Wheelers,Urban,Night,Humid,30,132,High
+17,Khairatabad Circle,17.253709,78.410915,12,1,33,Cars,Corporate Zone,Evening,Fog,100,120,High
+18,Mehdipatnam Bus Depot,17.505796,78.526289,67,3,20,Buses,Highway,Night,Rainy,30,154,High
+19,LB Nagar Junction,17.53111,78.524161,24,2,7,Buses,Urban,Morning,Dust,30,63,Medium
+20,Charminar Circle,17.391892,78.495411,69,4,20,2-Wheelers,Corporate Zone,Morning,Dust,60,165,High
+21,HITEC City Cyber Towers,17.552165,78.586276,68,2,6,Buses,Expressway,Night,Dust,100,104,High
+22,Mehdipatnam Bus Depot,17.31652,78.321248,66,2,29,Buses,Main Road,Evening,Humid,100,171,High
+23,Secunderabad Station,17.49645,78.281552,53,3,22,Autos,Corporate Zone,Day,Fog,80,146,High
+24,Moosapet Metro Rd,17.312092,78.313444,51,0,30,Mixed,Narrow Urban,Evening,Clear,80,141,High
+25,Kukatpally JNTU,17.207951,78.510486,35,2,32,Mixed,Highway,Night,Dust,80,149,High
+26,RTC X Roads,17.571484,78.409403,31,2,6,2-Wheelers,Expressway,Night,Fog,100,67,High
+27,Shamshabad Airport Road,17.482772,78.451728,66,3,7,Buses,Corporate Zone,Morning,Humid,80,114,High
+28,Bahadurpura,17.417236,78.534447,30,0,6,2-Wheelers,Expressway,Morning,Rainy,60,48,Medium
+29,LB Stadium Area,17.498571,78.521885,41,0,28,2-Wheelers,Corporate Zone,Morning,Clear,80,125,High
+30,Mehdipatnam Bus Depot,17.297833,78.369785,52,3,21,2-Wheelers,Corporate Zone,Morning,Humid,60,142,High
+31,Moosapet Metro Rd,17.482817,78.596035,15,4,9,Buses,Main Road,Day,Clear,80,78,High
+32,Dilsukhnagar Metro,17.286037,78.460672,24,3,28,Mixed,Narrow Urban,Evening,Humid,100,135,High
+33,Paradise Circle,17.488148,78.362421,63,4,26,Mixed,Narrow Urban,Morning,Clear,50,177,High
+34,Secunderabad Station,17.242713,78.516838,45,4,30,Mixed,Highway,Morning,Fog,100,171,High
+35,Uppal Metro Station,17.393877,78.484191,55,0,18,2-Wheelers,Highway,Evening,Rainy,30,109,High
+36,Hayathnagar Main Rd,17.300465,78.307161,52,4,22,Mixed,Main Road,Peak,Humid,40,154,High
+37,Madhapur Durgam Cheruvu,17.294182,78.565363,38,4,26,2-Wheelers,Urban,Day,Fog,100,152,High
+38,Bowenpally,17.252669,78.520907,64,3,28,Mixed,Urban,Day,Fog,60,175,High
+39,Miyapur Crossroad,17.205979,78.503734,10,3,6,Mixed,Expressway,Evening,Fog,60,55,Medium
+40,HITEC City Cyber Towers,17.397485,78.327483,40,3,14,Buses,Main Road,Night,Fog,100,109,High
+41,Aramghar X Road,17.517927,78.497566,62,3,21,Cars,Urban,Morning,Rainy,50,152,High
+42,Tank Bund Road,17.324747,78.456451,34,2,5,Buses,Expressway,Morning,Clear,40,67,High
+43,Madhapur Durgam Cheruvu,17.213193,78.348759,66,2,29,Mixed,Narrow Urban,Morning,Dust,30,171,High
+44,Banjara Hills Rd 12,17.456916,78.571186,52,1,21,Cars,Highway,Day,Dust,50,124,High
+45,Tolichowki Main Road,17.503018,78.591073,50,2,22,Mixed,Corporate Zone,Evening,Fog,100,134,High
+46,Charminar Circle,17.257672,78.511633,65,4,27,Autos,Expressway,Peak,Clear,40,182,High
+47,Shivam Road,17.32846,78.592223,30,1,11,Buses,Expressway,Day,Fog,70,72,High
+48,Choutuppal Highway,17.287665,78.51666,18,1,10,Buses,Highway,Night,Dust,40,57,Medium
+49,Paradise Circle,17.396067,78.299192,64,4,4,2-Wheelers,Narrow Urban,Evening,Clear,100,112,High
+50,Tank Bund Road,17.546023,78.550731,40,1,28,Mixed,Expressway,Morning,Clear,100,133,High
+51,KPHB Phase 5,17.285334,78.463816,31,1,27,2-Wheelers,Main Road,Day,Dust,70,121,High
+52,Kukatpally JNTU,17.519581,78.291402,19,4,32,Mixed,Expressway,Night,Dust,100,151,High
+53,Afzalgunj,17.528133,78.502505,15,3,29,Cars,Expressway,Night,Fog,30,129,High
+54,Kukatpally JNTU,17.389071,78.538867,59,2,3,Cars,Main Road,Morning,Rainy,50,86,High
+55,Jubilee Hills Checkpost,17.264795,78.567483,40,0,7,Cars,Urban,Peak,Humid,50,61,Medium
+56,Bahadurpura,17.401407,78.355017,48,1,30,Cars,Narrow Urban,Evening,Rainy,50,147,High
+57,Ameerpet Metro,17.58287,78.480567,48,4,10,2-Wheelers,Expressway,Night,Fog,30,114,High
+58,Gachibowli Flyover,17.223216,78.552531,40,4,28,Cars,Main Road,Peak,Clear,80,160,High
+59,Choutuppal Highway,17.356862,78.546845,56,0,12,Autos,Narrow Urban,Morning,Dust,60,92,High
+60,LB Nagar Junction,17.435878,78.455647,45,0,13,Buses,Main Road,Day,Dust,70,84,High
+61,HITEC City Cyber Towers,17.225421,78.446637,51,1,26,Cars,Narrow Urban,Morning,Dust,60,138,High
+62,Bahadurpura,17.378393,78.480065,43,2,2,Buses,Narrow Urban,Evening,Fog,50,67,High
+63,Necklace Road,17.455882,78.569189,39,0,23,Mixed,Expressway,Day,Humid,40,108,High
+64,Charminar Circle,17.256807,78.479357,39,3,9,Autos,Narrow Urban,Morning,Dust,100,93,High
+65,Nampally Station,17.443027,78.414724,58,2,16,Cars,Urban,Morning,Humid,30,124,High
+66,Ameerpet Metro,17.216872,78.485993,21,3,5,2-Wheelers,Urban,Evening,Clear,50,63,Medium
+67,Paradise Circle,17.35812,78.513125,24,3,11,Mixed,Expressway,Peak,Fog,40,84,High
+68,Narayanaguda,17.282533,78.255174,54,2,3,Mixed,Expressway,Night,Humid,100,81,High
+69,HITEC City Cyber Towers,17.411865,78.575593,62,1,21,Cars,Narrow Urban,Day,Dust,60,134,High
+70,Nampally Station,17.476301,78.577458,42,1,33,Buses,Urban,Morning,Fog,60,150,High
+71,Masab Tank,17.514411,78.343482,27,3,18,Cars,Highway,Evening,Rainy,30,108,High
+72,Khairatabad Circle,17.426922,78.413769,17,0,26,Autos,Expressway,Night,Fog,30,95,High
+73,LB Nagar Junction,17.470484,78.256612,18,3,28,Cars,Main Road,Peak,Humid,30,129,High
+74,Necklace Road,17.383991,78.565989,13,3,17,Cars,Main Road,Morning,Humid,70,91,High
+75,Afzalgunj,17.382197,78.387054,48,1,25,Buses,Expressway,Night,Dust,40,132,High
+76,Nampally Station,17.36899,78.270291,63,0,6,Mixed,Urban,Day,Clear,50,81,High
+77,Necklace Road,17.317466,78.488386,18,0,21,Autos,Expressway,Day,Humid,50,81,High
+78,Kondapur Junction,17.200258,78.384801,65,4,10,Cars,Narrow Urban,Peak,Humid,60,131,High
+79,Jubilee Hills Checkpost,17.588416,78.327377,25,4,15,Autos,Expressway,Day,Fog,80,106,High
+80,Kukatpally JNTU,17.427477,78.541091,55,4,8,Buses,Highway,Peak,Rainy,40,115,High
+81,Shamshabad Airport Road,17.592011,78.326011,38,0,16,Cars,Urban,Peak,Dust,50,86,High
+82,Masab Tank,17.506338,78.320425,27,4,28,Mixed,Main Road,Peak,Humid,60,147,High
+83,KPHB Phase 5,17.598353,78.561963,50,1,3,Mixed,Main Road,Peak,Fog,50,68,High
+84,LB Nagar Junction,17.449342,78.278305,60,2,24,Buses,Highway,Night,Humid,80,150,High
+85,Banjara Hills Rd 12,17.417482,78.250513,22,2,14,Mixed,Corporate Zone,Night,Clear,80,82,High
+86,Choutuppal Highway,17.357866,78.527338,49,0,28,Mixed,Main Road,Peak,Fog,30,133,High
+87,Kondapur Junction,17.309839,78.408635,45,1,16,Autos,Expressway,Night,Rainy,60,102,High
+88,Kondapur Junction,17.338655,78.571558,46,3,5,Autos,Corporate Zone,Day,Clear,70,88,High
+89,LB Nagar Junction,17.477876,78.265705,58,4,9,Mixed,Narrow Urban,Night,Dust,70,121,High
+90,HITEC City Cyber Towers,17.286144,78.471271,28,4,23,Cars,Main Road,Evening,Clear,50,133,High
+91,Hayathnagar Main Rd,17.225734,78.288397,53,0,32,Autos,Highway,Morning,Rainy,60,149,High
+92,Charminar Circle,17.291856,78.281566,39,1,11,Buses,Main Road,Night,Dust,80,81,High
+93,Paradise Circle,17.331564,78.379419,41,0,8,2-Wheelers,Main Road,Night,Clear,40,65,Medium
+94,Tolichowki Main Road,17.550993,78.291729,13,2,33,Autos,Highway,Peak,Rainy,80,130,High
+95,Secunderabad Station,17.285465,78.267962,44,4,30,Autos,Main Road,Night,Fog,40,170,High
+96,Bahadurpura,17.359296,78.339477,56,4,19,2-Wheelers,Corporate Zone,Peak,Rainy,100,149,High
+97,Banjara Hills Rd 12,17.435822,78.568421,43,3,5,Mixed,Urban,Night,Rainy,40,85,High
+98,Uppal Metro Station,17.256506,78.581223,12,1,13,Mixed,Corporate Zone,Night,Rainy,40,60,Medium
+99,Afzalgunj,17.235633,78.386811,33,3,33,Cars,Urban,Evening,Rainy,80,159,High
+100,Moosapet Metro Rd,17.389954,78.492454,49,1,22,Autos,Urban,Day,Dust,100,124,High
+101,Ameerpet Metro,17.43908,78.333293,44,1,17,Mixed,Urban,Evening,Dust,30,104,High
+102,Dilsukhnagar Metro,17.217846,78.285901,58,3,9,Mixed,Corporate Zone,Day,Fog,50,112,High
+103,Aramghar X Road,17.382622,78.562463,26,0,31,Autos,Corporate Zone,Night,Dust,40,119,High
+104,Ramanthapur Main Rd,17.200993,78.577687,40,2,19,Buses,Narrow Urban,Peak,Clear,50,115,High
+105,Banjara Hills Rd 12,17.488827,78.567778,30,4,25,Autos,Urban,Night,Rainy,40,141,High
+106,Jubilee Hills Checkpost,17.523118,78.285918,15,2,3,Buses,Corporate Zone,Evening,Clear,80,42,Medium
+107,Moosapet Metro Rd,17.45419,78.269947,23,1,22,Cars,Expressway,Night,Fog,100,98,High
+108,Ameerpet Metro,17.45922,78.509175,19,4,21,Autos,Corporate Zone,Peak,Humid,100,118,High
+109,Narayanaguda,17.549379,78.44365,52,0,33,2-Wheelers,Corporate Zone,Night,Humid,60,151,High
+110,Miyapur Crossroad,17.389707,78.286817,67,2,34,2-Wheelers,Highway,Evening,Clear,60,187,High
+111,Jubilee Hills Checkpost,17.285265,78.421002,16,0,5,Autos,Urban,Morning,Clear,60,31,Medium
+112,Moosapet Metro Rd,17.256492,78.253696,14,0,19,2-Wheelers,Urban,Morning,Rainy,80,71,High
+113,Charminar Circle,17.289489,78.365703,14,1,28,2-Wheelers,Main Road,Evening,Dust,50,107,High
+114,Kondapur Junction,17.441124,78.553698,53,3,8,Buses,Main Road,Morning,Humid,100,104,High
+115,Habsiguda,17.345369,78.54919,15,2,25,Mixed,Highway,Night,Humid,30,108,High
+116,Hayathnagar Main Rd,17.287246,78.253562,66,4,32,Buses,Main Road,Morning,Humid,70,198,High
+117,Uppal Metro Station,17.417506,78.503779,31,2,27,Mixed,Urban,Evening,Rainy,50,130,High
+118,Attapur Pillar 89,17.426951,78.520725,31,4,5,Cars,Main Road,Morning,Humid,80,82,High
+119,KPHB Phase 5,17.486104,78.421468,11,4,34,Cars,Main Road,Evening,Clear,30,149,High
+120,RTC X Roads,17.506171,78.496737,62,3,9,Cars,Urban,Evening,Dust,40,116,High
+121,Necklace Road,17.39004,78.375398,52,1,34,2-Wheelers,Narrow Urban,Evening,Dust,40,163,High
+122,KPHB Phase 5,17.214326,78.402938,46,0,24,Cars,Narrow Urban,Evening,Dust,50,118,High
+123,Shivam Road,17.220583,78.294457,17,0,12,Autos,Corporate Zone,Day,Humid,60,53,Medium
+124,Masab Tank,17.332661,78.365315,67,4,33,Autos,Corporate Zone,Peak,Dust,40,202,High
+125,Attapur Pillar 89,17.233949,78.439504,54,3,33,Buses,Narrow Urban,Day,Clear,70,180,High
+126,HITEC City Cyber Towers,17.25515,78.51087,26,1,27,Mixed,Main Road,Morning,Dust,70,116,High
+127,Dilsukhnagar Metro,17.469711,78.589095,56,4,11,Mixed,Narrow Urban,Morning,Fog,40,125,High
+128,Kukatpally JNTU,17.476024,78.323648,32,3,2,Cars,Urban,Day,Clear,60,65,Medium
+129,Khairatabad Circle,17.373278,78.408766,41,4,33,Cars,Expressway,Night,Clear,60,176,High
+130,Narayanaguda,17.562541,78.556514,26,3,12,Buses,Urban,Evening,Rainy,60,89,High
+131,Afzalgunj,17.588215,78.347389,59,1,12,Cars,Narrow Urban,Peak,Fog,80,104,High
+132,Tank Bund Road,17.513351,78.329029,28,3,32,Buses,Urban,Day,Rainy,60,151,High
+133,Nampally Station,17.516585,78.405983,26,1,22,Mixed,Urban,Peak,Dust,80,101,High
+134,Habsiguda,17.3114,78.348098,42,4,26,Autos,Narrow Urban,Day,Fog,40,156,High
+135,Miyapur Crossroad,17.546533,78.491163,35,1,2,Autos,Corporate Zone,Peak,Rainy,40,50,Medium
+136,RTC X Roads,17.286306,78.576291,44,1,14,2-Wheelers,Expressway,Day,Fog,60,95,High
+137,Bahadurpura,17.262001,78.327292,42,0,2,2-Wheelers,Urban,Peak,Clear,60,48,Medium
+138,KPHB Phase 5,17.531506,78.272203,28,4,15,Cars,Main Road,Morning,Clear,50,109,High
+139,Uppal Metro Station,17.468664,78.599701,51,4,17,2-Wheelers,Corporate Zone,Day,Clear,60,138,High
+140,Necklace Road,17.308203,78.278417,54,3,12,Mixed,Main Road,Morning,Dust,40,117,High
+141,KPHB Phase 5,17.341743,78.52982,49,4,7,Buses,Narrow Urban,Morning,Humid,100,106,High
+142,Secunderabad Station,17.21981,78.413178,25,0,8,Mixed,Corporate Zone,Peak,Humid,100,49,Medium
+143,Uppal Metro Station,17.299975,78.515616,47,2,27,Mixed,Main Road,Evening,Rainy,30,146,High
+144,Masab Tank,17.236699,78.368377,10,3,21,Autos,Expressway,Peak,Rainy,30,100,High
+145,Secunderabad Station,17.531027,78.552224,60,4,23,Autos,Highway,Night,Fog,100,165,High
+146,Moosapet Metro Rd,17.452047,78.470817,40,4,2,Mixed,Main Road,Night,Humid,70,82,High
+147,Shivam Road,17.49233,78.489977,67,2,12,Buses,Narrow Urban,Peak,Dust,40,121,High
+148,Begumpet Airport Rd,17.201998,78.488279,41,2,4,2-Wheelers,Urban,Morning,Humid,40,71,High
+149,Aramghar X Road,17.420792,78.337053,17,3,10,Cars,Main Road,Night,Clear,50,74,High
+150,Ameerpet Metro,17.327452,78.375425,24,0,24,2-Wheelers,Narrow Urban,Morning,Humid,100,96,High
+151,Masab Tank,17.505172,78.589607,12,2,7,Buses,Highway,Morning,Clear,70,51,Medium
+152,KPHB Phase 5,17.362102,78.290326,49,3,13,Autos,Expressway,Night,Dust,80,115,High
+153,Habsiguda,17.202198,78.39785,51,1,28,Mixed,Corporate Zone,Evening,Humid,100,144,High
+154,Miyapur Crossroad,17.289456,78.290859,56,3,28,Buses,Urban,Peak,Clear,30,167,High
+155,Shivam Road,17.378153,78.46019,15,4,31,Autos,Narrow Urban,Evening,Fog,60,144,High
+156,Necklace Road,17.439797,78.34687,15,0,19,Mixed,Urban,Morning,Clear,80,72,High
+157,Miyapur Crossroad,17.229348,78.404421,28,4,4,Buses,Urban,Night,Fog,70,76,High
+158,Masab Tank,17.440751,78.434958,14,1,15,Buses,Urban,Peak,Rainy,50,68,High
+159,Mehdipatnam Bus Depot,17.466868,78.271134,37,0,27,2-Wheelers,Narrow Urban,Night,Rainy,50,118,High
+160,KPHB Phase 5,17.234052,78.288731,18,2,19,Cars,Main Road,Night,Rainy,60,93,High
+161,Khairatabad Circle,17.255048,78.287919,65,4,26,2-Wheelers,Highway,Night,Rainy,40,179,High
+162,Nampally Station,17.276047,78.371679,36,1,7,Autos,Main Road,Peak,Rainy,40,66,High
+163,Punjagutta,17.546049,78.356776,17,2,12,Mixed,Urban,Day,Clear,50,71,High
+164,Shivam Road,17.239367,78.554452,18,4,6,Cars,Main Road,Day,Rainy,30,72,High
+165,Punjagutta,17.21365,78.440765,10,1,21,Autos,Corporate Zone,Evening,Clear,80,82,High
+166,RTC X Roads,17.596319,78.404867,67,4,5,Cars,Expressway,Morning,Dust,50,118,High
+167,Hayathnagar Main Rd,17.525488,78.503032,67,3,27,Buses,Main Road,Night,Clear,70,175,High
+168,Necklace Road,17.44471,78.587698,30,3,15,Buses,Expressway,Night,Fog,100,102,High
+169,Tolichowki Main Road,17.586213,78.371182,18,4,24,Autos,Main Road,Morning,Clear,100,126,High
+170,RTC X Roads,17.523213,78.320254,51,3,11,Cars,Highway,Morning,Fog,30,111,High
+171,Jubilee Hills Checkpost,17.473396,78.523286,61,4,8,2-Wheelers,Corporate Zone,Evening,Fog,70,121,High
+172,Bowenpally,17.518761,78.394577,38,0,24,2-Wheelers,Highway,Evening,Clear,100,110,High
+173,Punjagutta,17.478453,78.470981,11,0,23,Cars,Main Road,Day,Rainy,50,80,High
+174,Miyapur Crossroad,17.367157,78.411413,52,2,14,Cars,Main Road,Evening,Fog,50,112,High
+175,Narayanaguda,17.529203,78.397109,25,0,34,Autos,Urban,Night,Fog,80,127,High
+176,Miyapur Crossroad,17.290745,78.478157,68,3,5,Mixed,Corporate Zone,Night,Clear,100,110,High
+177,Begumpet Airport Rd,17.236493,78.486413,64,0,22,Autos,Corporate Zone,Evening,Dust,50,130,High
+178,Tank Bund Road,17.343287,78.30149,62,4,27,Buses,Expressway,Peak,Humid,80,179,High
+179,RTC X Roads,17.500293,78.518467,55,4,6,2-Wheelers,Urban,Morning,Clear,100,109,High
+180,Kukatpally JNTU,17.499931,78.406949,42,0,31,Buses,Main Road,Night,Clear,40,135,High
+181,Hayathnagar Main Rd,17.227301,78.586772,55,3,30,Mixed,Urban,Evening,Humid,80,172,High
+182,Afzalgunj,17.460062,78.412023,61,1,6,Cars,Narrow Urban,Night,Dust,60,88,High
+183,Necklace Road,17.348878,78.574749,51,1,21,Buses,Expressway,Night,Clear,80,123,High
+184,Bahadurpura,17.507226,78.296684,22,0,3,Cars,Corporate Zone,Night,Fog,40,31,Medium
+185,Paradise Circle,17.379802,78.354667,18,2,18,Cars,Main Road,Evening,Rainy,80,90,High
+186,Shamshabad Airport Road,17.209901,78.359536,45,1,31,Buses,Corporate Zone,Night,Fog,60,147,High
+187,Kondapur Junction,17.444282,78.344646,48,3,25,Cars,Corporate Zone,Day,Fog,60,150,High
+188,Narayanaguda,17.304782,78.320723,67,3,23,Buses,Urban,Night,Fog,50,163,High
+189,Secunderabad Station,17.545339,78.302552,37,0,7,2-Wheelers,Corporate Zone,Morning,Rainy,80,58,Medium
+190,Khairatabad Circle,17.223446,78.434066,42,4,23,Mixed,Main Road,Morning,Humid,70,147,High
+191,Tank Bund Road,17.3978,78.495623,24,3,34,Autos,Narrow Urban,Evening,Humid,60,153,High
+192,Masab Tank,17.342378,78.255451,33,2,15,Mixed,Main Road,Day,Humid,60,96,High
+193,Habsiguda,17.38392,78.390379,56,2,9,Cars,Highway,Evening,Rainy,40,101,High
+194,RTC X Roads,17.228841,78.310692,46,2,27,Cars,Main Road,Night,Rainy,50,145,High
+195,Attapur Pillar 89,17.241136,78.284372,46,3,33,Cars,Corporate Zone,Day,Clear,100,172,High
+196,Charminar Circle,17.2206,78.295717,33,3,16,Autos,Highway,Peak,Humid,80,108,High
+197,Kondapur Junction,17.572341,78.563742,57,3,7,Buses,Expressway,Day,Humid,40,105,High
+198,Aramghar X Road,17.470414,78.397296,19,4,24,Autos,Corporate Zone,Morning,Fog,80,127,High
+199,Jubilee Hills Checkpost,17.469145,78.404172,12,3,13,Autos,Corporate Zone,Morning,Clear,100,78,High
+200,Miyapur Crossroad,17.523397,78.379419,55,0,29,Autos,Urban,Day,Clear,30,142,High

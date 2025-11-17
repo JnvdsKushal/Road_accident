@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="grid">
+  <div class="card" style="grid-column: span 12;">
+    <div class="body">
+      <div style="display:flex; justify-content: space-between; align-items:center; margin-bottom: 8px;">
+        <h2 style="margin:0;">Alerts</h2>
+        <div style="display:flex; gap:8px;">
+          <select id="sevFilter" class="fld" style="width:160px;">
+            <option value="all">All severities</option>
+            <option value="fatal">Fatal</option>
+            <option value="high">High</option>
+            <option value="moderate">Moderate</option>
+          </select>
+          <button id="simulate" class="btn primary" type="button">Simulate</button>
+        </div>
+      </div>
+
+      <div id="alertsList" style="display:grid; gap:10px;">
+        <!-- items injected by JS -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .fld{ 
+    padding:10px 14px; 
+    background:#ffffff; 
+    color:var(--text); 
+    border:1.5px solid var(--border); 
+    border-radius:8px;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+  }
+  .fld:hover { border-color: var(--primary); }
+  .fld:focus { 
+    border-color: var(--primary); 
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); 
+    outline: none;
+  }
+  .btn{ 
+    padding:10px 18px; 
+    border-radius:8px; 
+    border:1.5px solid var(--border); 
+    color:var(--text); 
+    background:#ffffff; 
+    cursor:pointer; 
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+  .btn:hover{ 
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,.1);
+  }
+  .btn.primary{ 
+    background:linear-gradient(135deg, var(--primary), var(--accent)); 
+    color:white; 
+    border:none; 
+    font-weight:600; 
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  }
+  .btn.primary:hover {
+    box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+    transform: translateY(-2px);
+  }
+  .alertItem{ 
+    display:flex; 
+    gap:14px; 
+    align-items:flex-start; 
+    padding:16px; 
+    border:1.5px solid var(--border); 
+    border-radius:12px; 
+    background:#ffffff;
+    transition: all 0.2s ease;
+    animation: slideIn 0.3s ease;
+  }
+  .alertItem:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,.08);
+  }
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateX(-10px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  .sev{ 
+    padding:6px 12px; 
+    border-radius:999px; 
+    font-size:0.8rem; 
+    border:none;
+    font-weight: 600;
+  }
+  .sev.fatal{ 
+    background: rgba(239, 68, 68, 0.1); 
+    color: #dc2626;
+    border: 1.5px solid rgba(239, 68, 68, 0.3);
+  }
+  .sev.high{ 
+    background: rgba(245, 158, 11, 0.1); 
+    color: #d97706;
+    border: 1.5px solid rgba(245, 158, 11, 0.3);
+  }
+  .sev.moderate{ 
+    background: rgba(59, 130, 246, 0.1); 
+    color: #2563eb;
+    border: 1.5px solid rgba(59, 130, 246, 0.3);
+  }
+  .time{ color: var(--muted); font-size:0.85rem; }
+</style>
+
+<script>
+  const list = document.getElementById('alertsList');
+  const filterSel = document.getElementById('sevFilter');
+  const simulateBtn = document.getElementById('simulate');
+  const sample = [
+    { sev:'fatal', msg:'FATAL predicted near A12 interchange', loc:'lat 51.50, lon -0.12', time:'just now' },
+    { sev:'high', msg:'High risk on M25 due to weather', loc:'lat 51.66, lon -0.28', time:'3m ago' },
+    { sev:'moderate', msg:'Moderate congestion around city center', loc:'lat 51.52, lon -0.09', time:'12m ago' },
+  ];
+
+  function render(items){
+    list.innerHTML = '';
+    items.forEach(it=>{
+      const el = document.createElement('div');
+      el.className = 'alertItem';
+      el.innerHTML = `<span class="sev ${it.sev}">${it.sev.toUpperCase()}</span>
+        <div>
+          <div style="font-weight:700; margin-bottom:4px;">${it.msg}</div>
+          <div class="time">${it.loc} • ${it.time}</div>
+        </div>`;
+      list.appendChild(el);
+    });
+  }
+
+  function applyFilter(){
+    const v = filterSel.value;
+    render(v==='all'? sample : sample.filter(s=> s.sev===v));
+  }
+
+  if(filterSel) filterSel.addEventListener('change', applyFilter);
+  if(simulateBtn) simulateBtn.addEventListener('click', ()=>{
+    sample.unshift({ sev:'high', msg:'Heavy rain cell approaching current location', loc:'lat 51.49, lon -0.10', time:'now' });
+    applyFilter();
+  });
+
+  render(sample);
+</script>
+{% endblock %}

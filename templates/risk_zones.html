@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block content %}
+<section style="padding:20px;">
+  <h1 style="margin-bottom:20px;">Accident Risk Zones (K-Means Clustering)</h1>
+
+  <div id="riskMap" style="height:500px; border-radius:12px; border:1px solid var(--border);"></div>
+
+  <div style="margin-top:20px; display:flex; gap:20px;">
+    <div style="flex:1; background:#fff; padding:16px; border-radius:12px;">
+      <h3 style="margin-bottom:10px;">Cluster Statistics</h3>
+      <ul>
+        <li>High Risk Areas: {{ risk_counts.High_Risk|default:"0" }}</li>
+        <li>Medium Risk Areas: {{ risk_counts.Medium_Risk|default:"0" }}</li>
+        <li>Low Risk Areas: {{ risk_counts.Low_Risk|default:"0" }}</li>
+      </ul>
+    </div>
+
+    <div style="flex:1; background:#fff; padding:16px; border-radius:12px;">
+      <h3 style="margin-bottom:10px;">Insights</h3>
+      <p>These risk zones are derived from clustering historical accident data using K-Means.  
+         The map shows locations categorized as high, medium, or low risk based on accident frequency.</p>
+    </div>
+  </div>
+</section>
+
+{{ zones|default:"[]"|json_script:"zonesData" }}
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  const zones = JSON.parse(document.getElementById('zonesData')?.textContent || '[]');
+  const colorFor = (risk) => risk === 'High Risk' ? '#ef4444' : (risk === 'Medium Risk' ? '#f59e0b' : '#10b981');
+  const map = L.map('riskMap').setView([22.9734, 78.6569], 5);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 18,
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
+
+  zones.forEach(z => {
+    if (typeof z.Latitude !== 'number' || typeof z.Longitude !== 'number') return;
+    const marker = L.circleMarker([z.Latitude, z.Longitude], {
+      radius: 7,
+      color: colorFor(z.Risk_Level),
+      weight: 2,
+      fillColor: colorFor(z.Risk_Level),
+      fillOpacity: 0.4
+    }).addTo(map);
+    marker.bindPopup(`<strong>${z.State || 'Location'}</strong><br>Risk: ${z.Risk_Level}<br>Accidents: ${z.Accidents}`);
+  });
+
+  const pts = zones.filter(z => typeof z.Latitude === 'number' && typeof z.Longitude === 'number');
+  if (pts.length > 0) {
+    const bounds = L.latLngBounds(pts.map(z => [z.Latitude, z.Longitude]));
+    map.fitBounds(bounds.pad(0.2));
+  }
+</script>
+{% endblock %}

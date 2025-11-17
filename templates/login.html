@@ -1,0 +1,377 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+  .auth-container {
+    min-height: 90vh;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    animation: fadeIn 0.6s ease;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  .auth-left {
+    flex: 1.2;
+    background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 40px;
+    overflow: hidden;
+  }
+  
+  .auth-left::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 20% 50%, rgba(255,255,255,0.15) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(255,255,255,0.1) 0%, transparent 50%);
+  }
+  
+  .illustration-wrapper {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 500px;
+  }
+  
+  .illustration-icon {
+    width: 120px;
+    height: 120px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  .illustration-icon svg {
+    width: 60px;
+    height: 60px;
+    filter: drop-shadow(0 4px 12px rgba(0,0,0,0.2));
+  }
+  
+  .illustration-title {
+    color: white;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+  
+  .illustration-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+  
+  .auth-right {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 40px;
+    background: #f8fafc;
+  }
+  
+  .auth-form-container {
+    width: 100%;
+    max-width: 440px;
+  }
+  
+  .auth-header {
+    margin-bottom: 32px;
+  }
+  
+  .auth-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0 0 8px 0;
+  }
+  
+  .auth-subtitle {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin: 0;
+  }
+  
+  .form-card {
+    background: white;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    border: 1px solid var(--border);
+  }
+  
+  .lbl {
+    display: block;
+    margin: 0 0 8px 0;
+    color: var(--text);
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  
+  .fld {
+    width: 100%;
+    padding: 14px 16px;
+    background: #ffffff;
+    color: var(--text);
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  
+  .fld:hover {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.08);
+  }
+  
+  .fld:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.12);
+    outline: none;
+  }
+  
+  .btn {
+    padding: 14px 28px;
+    border-radius: 10px;
+    border: 2px solid var(--border);
+    color: var(--text);
+    background: #ffffff;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-top: 8px;
+  }
+  
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,.12);
+  }
+  
+  .btn.primary {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: white;
+    border: none;
+    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.4);
+  }
+  
+  .btn.primary:hover {
+    box-shadow: 0 8px 24px rgba(59, 130, 246, 0.5);
+    transform: translateY(-2px);
+  }
+  
+  .spinner {
+    width: 20px;
+    height: 20px;
+    border: 3px solid var(--border);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  .alert-danger {
+    margin-bottom: 16px;
+    padding: 14px 16px;
+    border-radius: 10px;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1.5px solid rgba(239, 68, 68, 0.3);
+    color: #dc2626;
+    font-size: 0.9rem;
+    font-weight: 500;
+    animation: slideDown 0.3s ease;
+  }
+  
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .form-footer {
+    margin-top: 20px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  
+  .form-footer a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s ease;
+  }
+  
+  .form-footer a:hover {
+    color: var(--accent);
+  }
+  
+  @media (max-width: 968px) {
+    .auth-container {
+      flex-direction: column;
+      min-height: auto;
+    }
+    
+    .auth-left {
+      padding: 40px 20px;
+      min-height: 300px;
+    }
+    
+    .illustration-title {
+      font-size: 1.5rem;
+    }
+    
+    .illustration-subtitle {
+      font-size: 1rem;
+    }
+    
+    .auth-right {
+      padding: 40px 20px;
+    }
+    
+    .form-card {
+      padding: 32px 24px;
+    }
+    
+    .auth-title {
+      font-size: 1.75rem;
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .auth-left {
+      min-height: 200px;
+    }
+    
+    .illustration-icon {
+      width: 80px;
+      height: 80px;
+    }
+    
+    .form-card {
+      padding: 28px 20px;
+    }
+  }
+</style>
+
+<div class="auth-container">
+  <!-- Left Side - Illustration -->
+  <div class="auth-left">
+    <div class="illustration-wrapper">
+      <div class="illustration-icon">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 17L12 22L22 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 12L12 17L22 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h2 class="illustration-title">Welcome Back</h2>
+      <p class="illustration-subtitle">Access your personalized road safety dashboard and track your journey analytics.</p>
+    </div>
+  </div>
+  
+  <!-- Right Side - Form -->
+  <div class="auth-right">
+    <div class="auth-form-container">
+      <div class="auth-header">
+        <h1 class="auth-title">Sign In</h1>
+        <p class="auth-subtitle">Enter your credentials to access your account</p>
+      </div>
+      
+      <div class="form-card">
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert-danger">{{ message }}</div>
+          {% endfor %}
+        {% endif %}
+        
+        {% if errors %}
+          {% for error in errors %}
+            <div class="alert-danger">{{ error }}</div>
+          {% endfor %}
+        {% endif %}
+        
+        <form id="loginForm" method="POST" novalidate>
+          {% csrf_token %}
+          <div style="margin-bottom: 20px;">
+            <label class="lbl" for="email">Email</label>
+            <input id="email" name="email" class="fld" type="email" placeholder="you@example.com" required>
+          </div>
+          
+          <div style="margin-bottom: 20px;">
+            <label class="lbl" for="password">Password</label>
+            <input id="password" name="password" class="fld" type="password" placeholder="••••••••" required>
+          </div>
+          
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <label style="display: flex; gap: 8px; align-items: center; color: var(--muted); font-size: 0.9rem; cursor: pointer;">
+              <input type="checkbox" id="remember"> Remember me
+            </label>
+            <a href="#" style="color: var(--primary); font-size: 0.9rem; text-decoration: none; font-weight: 500;">Forgot password?</a>
+          </div>
+          
+          <div style="display: flex; gap: 10px; align-items: center;">
+            <button class="btn primary" type="submit">Sign In</button>
+            <div id="spin" class="spinner" style="display: none;"></div>
+          </div>
+        </form>
+        
+        <div class="form-footer">
+          Don't have an account? <a href="/register/">Register now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const form = document.getElementById('loginForm');
+  const spin = document.getElementById('spin');
+  
+  form.addEventListener('submit', (e) => {
+    const email = document.getElementById('email').value.trim();
+    const pass = document.getElementById('password').value;
+    
+    if (!email || !pass) {
+      e.preventDefault();
+      alert('Email and password are required');
+      return;
+    }
+    
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+      e.preventDefault();
+      alert('Enter a valid email');
+      return;
+    }
+    
+    spin.style.display = 'inline-block';
+  });
+</script>
+
+{% endblock %}
