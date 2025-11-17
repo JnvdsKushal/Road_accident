@@ -1,9 +1,8 @@
-# prediction/views.py - COMPLETE FILE WITH OSRM FALLBACK AND CORS FIX
+# prediction/views.py - COMPLETE FILE WITH ALL ERRORS FIXED
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.http import require_http_methods
 from django.contrib import messages
 import joblib
 import os
@@ -13,9 +12,7 @@ import traceback
 import pandas as pd
 import requests
 import math
-from .models import PredictionLog, CustomUser, RiskZone
-from django.contrib.auth.hashers import make_password, check_password
-from django.core.files.storage import FileSystemStorage
+from .models import PredictionLog, CustomUser
 import logging
 
 logger = logging.getLogger(__name__)
@@ -234,7 +231,7 @@ def predict_json(request):
     try:
         log = PredictionLog.objects.create(input_json=payload, predicted_code=int(pred), predicted_label=label)
         log_id = log.id
-    except Exception as e:
+    except Exception:
         log_id = None
 
     return JsonResponse({
@@ -442,7 +439,7 @@ def load_hotspots_from_csv():
                     "radius": radius
                 })
             except Exception as e:
-                logger.error(f"Error parsing hotspot row: {str(e)}")
+                logger.error("Error parsing hotspot row: %s", str(e))
                 continue
     except Exception as e:
         logger.error(f"Error reading hotspots CSV: {str(e)}")
@@ -600,9 +597,9 @@ def get_routes_from_ors(start_lat, start_lng, end_lat, end_lng, alternatives=3):
         logger.error(f"ORS API request failed: {str(e)}")
         raise RuntimeError(f"ORS error: {str(e)}")
 
-# Add this function after get_routes_from_ors and before score_route_improved
-
-
+# ========================================
+# GENERATE SYNTHETIC ROUTES
+# ========================================
 def generate_alternative_routes(base_route, num_alternatives=2):
     """
     Generate synthetic alternative routes when API only returns 1 route
@@ -813,7 +810,6 @@ def normalize_risk_scores(scored_routes):
 # ========================================
 # MAIN COMPUTE ROUTES FUNCTION
 # ========================================
-# Update the compute_routes function to use synthetic routes
 @csrf_exempt
 def compute_routes(request):
     """
@@ -826,9 +822,8 @@ def compute_routes(request):
     
     try:
         payload = json.loads(request.body.decode('utf-8'))
-    except Exception as e:
-        logger.error(f"Invalid JSON: {str(e)}")
-        return JsonResponse({"error":"invalid_json","details":str(e)}, status=400)
+    except Exception:
+        return JsonResponse({"error":"invalid_json","details":"Invalid JSON payload"}, status=400)
 
     start = payload.get("start")
     end = payload.get("end")
@@ -841,7 +836,7 @@ def compute_routes(request):
         s_lng = float(start.get("lng"))
         e_lat = float(end.get("lat"))
         e_lng = float(end.get("lng"))
-    except (ValueError, TypeError, AttributeError) as e:
+    except (ValueError, TypeError, AttributeError):
         return JsonResponse({"error":"invalid coordinates format"}, status=400)
     
     logger.info(f"Computing routes: ({s_lat},{s_lng}) -> ({e_lat},{e_lng})")
@@ -904,7 +899,7 @@ def compute_routes(request):
             logger.error(f"All routing services failed. OSRM: {osrm_error}, ORS: {ors_error}")
             return JsonResponse({
                 "error": "all_routing_services_failed",
-                "details": f"Could not fetch routes. Please try again later."
+                "details": "Could not fetch routes. Please try again later."
             }, status=502)
     
     if not routes:
@@ -956,7 +951,6 @@ def compute_routes(request):
         provider_info += " + Synthetic Alternatives"
     
     logger.info(f"✓ Successfully computed {len(scored_sorted)} routes using {provider_info}")
-    logger.info(f"Route details: {[(r['distance_m'], r['duration_s'], r['risk_score']) for r in scored_sorted]}")
     
     return JsonResponse({
         "routes": scored_sorted,
